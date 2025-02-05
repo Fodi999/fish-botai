@@ -1,0 +1,33 @@
+app = "fish-bot"  # замените на имя вашего приложения на Fly.io
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[build]
+  # Если вы используете Dockerfile для сборки, можно не указывать образ явно
+  # image = "rust-chatbot"
+
+[env]
+  PORT = "8080"  # задаём переменную окружения для порта, на котором слушает приложение
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    interval = "15s"
+    grace_period = "5s"
+    timeout = "2s"
