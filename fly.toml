@@ -1,4 +1,4 @@
-app = "fish-bot"  # замените на имя вашего приложения на Fly.io
+app = "fish-botai"  # замените на имя вашего приложения на Fly.io
 
 kill_signal = "SIGINT"
 kill_timeout = 5
